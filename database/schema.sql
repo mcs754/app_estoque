@@ -1,5 +1,5 @@
 CREATE DATABASE db_estoque;
-USE estoque;
+USE db_estoque;
 CREATE TABLE produtos(
   id          INT           NOT NULL AUTO_INCREMENT,
   descricao   VARCHAR(200)  NOT NULL,

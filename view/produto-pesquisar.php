@@ -16,7 +16,25 @@ include 'cabecalho.php';?>
     </button>
 </form>
 <?php
-    include '../Vendor/autoload.php';
+if ($_POST){
+    include '../vendor/autoload.php';
+    $u = new \App\Model\Usuario();
+    $u->setEmail($_POST['email']);
+    $u->setSenha($_POST['senha']);
+    $uDAO = new \App\DAO\UsuarioDAO();
+    if ($uDAO->login($u))
+        header("Location: produto-pesquisar.php");
+    else
+        echo "<div class='alert-danger'>Email ou senha incorreta!</div>";
+}
+?>
+<?php
+    include '../vendor/autoload.php';
+
+    //Verificar se o usuário está logado
+    $uDAO = new \App\DAO\UsuarioDAO();
+    $uDAO->verificar();
+
     if (isset($_GET['msg']) && $_GET['msg'] ==1)
         echo "<div class='alert alert-success'>Produto excluído com sucesso!</div>";
     $p = new \App\Model\Produto();

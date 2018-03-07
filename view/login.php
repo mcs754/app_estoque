@@ -10,6 +10,19 @@
 <body>
     <div class="container">
         <h1>Controle de Estoque</h1>
+        <?php
+            if ($_POST){
+                include '../vendor/autoload.php';
+                $u = new \App\Model\Usuario();
+                $u->setEmail($_POST['email']);
+                $u->setSenha($_POST['senha']);
+                $uDAO = new \App\DAO\UsuarioDAO();
+                if ($uDAO->login($u))
+                    header("Location: produto-pesquisar.php");
+                else
+                    echo "<div class='alert-danger'>Email ou senha incorreta!</div>";
+            }
+        ?>
         <form action="login.php" method="post">
             <div class="form-group">
                 <label for="email">E-mail:</label>
